@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/YouSangSon/ys_models/golang/users";
+
+package users;
+
+enum Role {
+    USER = 0;
+    ADMIN = 1;
+}
+
+message UserEmail {
+    int64 id = 1;
+    string email = 2;
+}
+
+message SocialAccount {
+    int64 id = 1;
+    string provider = 2;
+    string accountId = 3;
+}
+
+message UserSubscription {
+    int64 id = 1;
+    string subscriptionType = 2;
+}
+
+message UsersEntity {
+    int64 id = 1;
+    string email = 2;
+    string password = 3;
+    string name = 4;
+    Role role = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+    repeated UserEmail emails = 8;
+    repeated SocialAccount social_accounts = 9;
+    repeated UserSubscription subscriptions = 10;
+}
