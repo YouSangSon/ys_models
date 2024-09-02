@@ -1,30 +1,56 @@
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-
 option go_package = "github.com/YouSangSon/ys_models/golang/users";
 
 package users;
 
+// Enum definitions
+enum SubscriptionStatus {
+    ACTIVE = 0;
+    EXPIRED = 1;
+    CANCELLED = 2;
+}
+
 enum Role {
-    USER = 0;
-    ADMIN = 1;
+    ADMIN = 0;
+    USER = 1;
+    GUEST = 2;
 }
 
-message UserEmail {
+// Message definitions
+message SubscriptionEntity {
     int64 id = 1;
-    string email = 2;
+    string name = 2;
+    string description = 3;
+    double price = 4;
+    int32 duration_days = 5;
 }
 
-message SocialAccount {
+message UserSubscriptionEntity {
     int64 id = 1;
-    string provider = 2;
-    string accountId = 3;
+    UsersEntity user = 2;
+    SubscriptionEntity subscription = 3;
+    string start_date = 4;
+    string end_date = 5;
+    SubscriptionStatus status = 6;
 }
 
-message UserSubscription {
+message SocialAccountEntity {
     int64 id = 1;
-    string subscriptionType = 2;
+    UsersEntity user = 2;
+    string provider = 3;
+    string provider_id = 4;
+    string email = 5;
+    string created_at = 6;
+    string updated_at = 7;
+}
+
+message UserEmailEntity {
+    int64 id = 1;
+    UsersEntity user = 2;
+    string email = 3;
+    bool verified = 4;
+    string created_at = 5;
 }
 
 message UsersEntity {
@@ -33,9 +59,9 @@ message UsersEntity {
     string password = 3;
     string name = 4;
     Role role = 5;
-    google.protobuf.Timestamp created_at = 6;
-    google.protobuf.Timestamp updated_at = 7;
-    repeated UserEmail emails = 8;
-    repeated SocialAccount social_accounts = 9;
-    repeated UserSubscription subscriptions = 10;
+    string created_at = 6;
+    string updated_at = 7;
+    repeated UserEmailEntity emails = 8;
+    repeated SocialAccountEntity social_accounts = 9;
+    repeated UserSubscriptionEntity subscriptions = 10;
 }
