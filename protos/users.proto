@@ -2,7 +2,11 @@ syntax = "proto3";
 
 option go_package = "github.com/YouSangSon/ys_models/golang/users";
 
-package users;
+// Java에서 import시 패키지 경로
+package yousang.models.users;
+
+// empty 리턴을 위한 추가
+import "google/protobuf/empty.proto";
 
 // Enum definitions
 enum SubscriptionStatus {
