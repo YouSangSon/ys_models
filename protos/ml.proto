@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "github.com/YouSangSon/ys_models/ml";
+
+// Java에서 import시 패키지 경로
+package yousang.models.ml;
+
+service MlGrpcService {
+  rpc Predict (PredictRequest) returns (PredictResponse) {}
+}
+
+message PredictRequest {
+  string model_input = 1;
+}
+
+message PredictResponse {
+  string model_output = 1;
+}
